@@ -1,8 +1,9 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
-var User = new Schema({
+const Schema = mongoose.Schema;
+
+const User = new Schema({
 	full_name: {
 		type: String,
 		required: 'Kindly enter you full name'
