@@ -1,17 +1,21 @@
 {
-  "name": "blogit",
-  "version": "1.0.0",
-  "description": "A simple blog application",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "node",
-    "express",
-    "javascript",
-    "react"
-  ],
-  "author": "Abdulrasaq Nasirudeen",
-  "license": "MIT"
+	"name": "blogit",
+	"start": "nodemon --watch server --exec babel-node server.js",
+	"version": "1.0.0",
+	"description": "A simple blog application",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [ "node", "express", "javascript", "react" ],
+	"author": "Abdulrasaq Nasirudeen",
+	"license": "MIT",
+	"devDependencies": {
+		"nodemon": "^1.14.12",
+		"winston": "^2.4.0"
+	},
+	"dependencies": {
+		"express": "^4.16.2",
+		"mongoose": "^5.0.3"
+	}
 }
