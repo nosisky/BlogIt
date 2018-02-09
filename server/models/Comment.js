@@ -1,8 +1,7 @@
-'use strict';
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const Comment = new Schema({
+const CommentSchema = new Schema({
 	userId: {
 		type: String,
 		required: 'User ID is required'
@@ -15,10 +14,10 @@ const Comment = new Schema({
 		type: String,
 		required: 'Please enter your password'
 	},
-	created_date: {
+	createdDate: {
 		type: Date,
 		default: Date.now
 	}
 });
 
-module.exports = mongoose.model('Comment', Comment);
+const Comment = (module.exports = mongoose.model('Comment', CommentSchema));

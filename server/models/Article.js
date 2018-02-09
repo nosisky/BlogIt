@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const Article = new Schema({
-	userId: {
+const ArticleSchema = new Schema({
+	authorId: {
 		type: String,
 		required: 'User ID is required'
 	},
@@ -15,10 +15,10 @@ const Article = new Schema({
 		type: String,
 		required: 'Please enter article content'
 	},
-	created_date: {
+	createdDate: {
 		type: Date,
 		default: Date.now
 	}
 });
 
-module.exports = mongoose.model('Article', Article);
+const Article = (module.exports = mongoose.model('Article', ArticleSchema));
