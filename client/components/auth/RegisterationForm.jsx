@@ -40,7 +40,7 @@ class RegisterationForm extends Component {
 											title="4 characters minimum"
 											name="username"
 											onChange={this.onChange}
-											id="icon_prefix"
+											id="username"
 											type="text"
 											className="validate"
 											required
@@ -55,7 +55,7 @@ class RegisterationForm extends Component {
 											title="a valid email, e.g: hello@gmail.com"
 											name="email"
 											onChange={this.onChange}
-											id="icon_prefix"
+											id="email"
 											type="text"
 											className="validate"
 											required
@@ -83,10 +83,9 @@ class RegisterationForm extends Component {
 										<input
 											name="passwordConfirm"
 											onChange={this.onChange}
-											id="icon_prefix"
+											id="passwordConfirm"
 											type="password"
 											className="validate"
-											onBlur={(event) => event.target.value === 'mmm'}
 											required
 										/>
 										<label htmlFor="icon_prefix">Confirm Password</label>

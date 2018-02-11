@@ -35,7 +35,7 @@ class LoginForm extends Component {
 										<i className="material-icons prefix">account_circle</i>
 										<input
 											name="username"
-											id="icon_prefix"
+											id="login_username"
 											onChange={this.onChange}
 											type="text"
 											className="validate"
@@ -47,7 +47,7 @@ class LoginForm extends Component {
 										<i className="material-icons prefix">vpn_key</i>
 										<input
 											name="password"
-											id="icon_prefix"
+											id="login_password"
 											onChange={this.onChange}
 											type="password"
 											className="validate"

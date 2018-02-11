@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import TinyMCE from 'react-tinymce';
+import { connect } from 'react-redux';
+
+import { addArticle } from '../../actions/ArticleActions';
 
 class NewArticle extends Component {
 	constructor(props) {
@@ -9,9 +12,28 @@ class NewArticle extends Component {
 			title: ''
 		};
 		this.onChange = this.onChange.bind(this);
+		this.editorOnChange = this.editorOnChange.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
 	}
 
-	onChange = (e) => {};
+	onChange(event) {
+		this.setState({
+			[event.target.name]: event.target.value
+		})
+	};
+
+	editorOnChange(event) {
+		this.setState({
+			content: event.target.getContent()
+		})
+	};
+
+	onSubmit(event) {
+		event.preventDefault();
+		this.editorOnChange;
+
+		this.props.addArticle(this.state)
+	};
 
 	render() {
 		return (
@@ -20,10 +42,16 @@ class NewArticle extends Component {
 					<div className="modal-content">
 						<h5 className="center-align">Add Article</h5>
 						<div className="row">
-							<form className="col s12">
+							<form className="col s12"
+								onSubmit={this.onSubmit}
+							>
 								<div className="row">
 									<div className="input-field col s12">
-										<input name="title" id="icon_prefix" type="text" className="validate" />
+										<input name="title" id="title" type="text"
+											onChange={this.onChange}
+											className="validate"
+											required
+										/>
 										<label htmlFor="icon_prefix">Title</label>
 									</div>
 								</div>
@@ -35,7 +63,7 @@ class NewArticle extends Component {
 											toolbar:
 												'undo redo | bold italic | alignleft aligncenter alignright' | 'img'
 										}}
-										onChange={this.onChange}
+										onChange={this.editorOnChange}
 									/>
 								</div>
 								<button className="btn right">Submit</button>
@@ -48,4 +76,11 @@ class NewArticle extends Component {
 	}
 }
 
-export default NewArticle;
+function mapStateToProps(state) {
+	return {
+		user: state.auth.user,
+		isAuthenticated: state.auth.authenticated,
+	};
+}
+
+export default connect(mapStateToProps, { addArticle })(NewArticle);

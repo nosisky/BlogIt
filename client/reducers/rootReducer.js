@@ -9,7 +9,7 @@ const appReducer = combineReducers({
 
 const rootReducer = (state, action) => {
 	if (action.type === 'unauth_user') {
-		state = undefined;
+		state.auth.user = {};
 	}
 
 	return appReducer(state, action);

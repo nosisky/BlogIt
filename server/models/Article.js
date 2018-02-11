@@ -5,9 +5,9 @@ mongoose.plugin(slug);
 const Schema = mongoose.Schema;
 
 const ArticleSchema = new Schema({
-	authorId: {
+	author: {
 		type: String,
-		required: 'User ID is required'
+		required: 'Author name is required'
 	},
 	title: {
 		type: String,
@@ -15,7 +15,7 @@ const ArticleSchema = new Schema({
 	},
 	slug: {
 		type: String,
-		slug: [ 'title' ],
+		slug: ['title'],
 		slug_padding_size: 4,
 		unique: true
 	},

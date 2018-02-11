@@ -3,7 +3,7 @@ import LoginForm from '../auth/LoginForm';
 import RegisterationForm from '../auth/RegisterationForm';
 import NewArticle from '../includes/NewArticle';
 const NavBar = ({ user, authenticated, logout }) => {
-	console.log(user, authenticated);
+
 	return (
 		<div>
 			<nav>

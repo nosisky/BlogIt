@@ -65,7 +65,9 @@ const ArticleController = {
    * @param {Object} res - response
    */
 	getOneArticle(req, res) {
-		Article.findById(req.params.id)
+		Article.findOne({
+			slug: req.params.slug
+		})
 			.then((article) => {
 				if (article) {
 					const newArticle = article.toObject();

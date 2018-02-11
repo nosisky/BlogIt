@@ -1,5 +1,59 @@
-$mainColor: #ed583a;
+$mainColor: #ed3a3a;
 
-.nav {
+nav {
   background-color: $mainColor !important;
+}
+
+div.preloader {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+	background: rgba(6, 95, 124, 0.94) url('https://loading.io/spinners/equalizer/lg.equalizer-bars-loader.gif') 
+	no-repeat center center;
+}
+
+.card {
+	height: 35em !important;
+	margin: 10px;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+	color: #ff4040 !important;
+}
+
+a {
+	color: $mainColor;
+}
+
+.img-blog {
+	height: 30px;
+  border-radius: 50px;
+}
+
+.divider {
+	margin: 10px !important;
+}
+
+.blog-post-content {
+	margin: 10px;
+}
+
+.card .card-content {
+	padding: 5px 10px;
+}
+
+.card .card-image .card-content .card-title {
+	font-size: 1.2rem;
+  line-height: 1.6rem;
+	font-weight: 400;
+}
+
+.article-section {
+	margin: 2em;
+	text-align: center;
+	border: 1px solid #ed3a3a;
 }

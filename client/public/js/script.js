@@ -8,9 +8,4 @@ $(document).ready(() => {
 
 	$('.modal').modal();
 
-	tinyMCE.init({
-		//mode : "textareas",
-		theme: 'simple',
-		selector: 'textarea:not(.textarea-no-styles)'
-	});
 });

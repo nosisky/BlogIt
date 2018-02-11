@@ -1,113 +1,45 @@
 import React from 'react';
+import ReactHtmlParser, {
+	processNodes,
+	convertNodeToElement, htmlparser2
+} from 'react-html-parser';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 
-const ArticleLists = () => {
+
+const ArticleLists = ({ title, content, slug, username, time }) => {
+	const newTime = moment(time).format('Do MMMM YYYY');
+
 	return (
-		<div className="row">
-			<div className="col s12 m3">
-				<div className="card">
-					<div className="card-image">
-						<img
-							height="250px"
-							width="100px"
-							src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Newspaper_news_rss_vector_paper_symbol_simple.png"
-						/>
-					</div>
-					<div className="card-content">
-						<p>
-							I am a very simple card. I am good at containing small bits of information. I am convenient
-							because I require little markup to use effectively.
-						</p>
-					</div>
-					<div className="card-action">
-						<a href="#">How To Hack a blog</a>
-					</div>
-				</div>
-			</div>
+		<div className="col s12 m3">
 
-			<div className="col s12 m3">
-				<div className="card">
-					<div className="card-image">
-						<img
-							height="250px"
-							width="100px"
-							src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Newspaper_news_rss_vector_paper_symbol_simple.png"
-						/>
-					</div>
-					<div className="card-content">
-						<p>
-							I am a very simple card. I am good at containing small bits of information. I am convenient
-							because I require little markup to use effectively.
-						</p>
-					</div>
-					<div className="card-action">
-						<a href="#">How To Hack a blog</a>
-					</div>
-				</div>
-			</div>
+			<div className="card">
 
-			<div className="col s12 m3">
-				<div className="card">
-					<div className="card-image">
-						<img
-							height="250px"
-							width="100px"
-							src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Newspaper_news_rss_vector_paper_symbol_simple.png"
-						/>
-					</div>
-					<div className="card-content">
-						<p>
-							I am a very simple card. I am good at containing small bits of information. I am convenient
-							because I require little markup to use effectively.
-						</p>
-					</div>
-					<div className="card-action">
-						<a href="#">How To Hack a blog</a>
-					</div>
+				<div className="card-image waves-effect waves-block waves-light">
+					<Link to={`/post/${slug}`}><img
+						src="http://demo.geekslabs.com/materialize-v1.0/images/img2.jpg" alt="blog-img" />
+					</Link>
 				</div>
-			</div>
-
-			<div className="col s12 m3">
-				<div className="card">
-					<div className="card-image">
-						<img
-							height="250px"
-							width="100px"
-							src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Newspaper_news_rss_vector_paper_symbol_simple.png"
-						/>
-					</div>
-					<div className="card-content">
-						<p>
-							I am a very simple card. I am good at containing small bits of information. I am convenient
-							because I require little markup to use effectively.
-						</p>
-					</div>
-					<div className="card-action">
-						<a href="#">How To Hack a blog</a>
-					</div>
-				</div>
-			</div>
-
-			<div className="col s12 m3">
-				<div className="card">
-					<div className="card-image">
-						<img
-							height="250px"
-							width="100px"
-							src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Newspaper_news_rss_vector_paper_symbol_simple.png"
-						/>
-					</div>
-					<div className="card-content">
-						<p>
-							I am a very simple card. I am good at containing small bits of information. I am convenient
-							because I require little markup to use effectively.
-						</p>
-					</div>
-					<div className="card-action">
-						<a href="#">How To Hack a blog</a>
+				<div className="card-content">
+					<p className="row">
+						<span className="left"><a href="">Technology</a></span>
+						<span className="right">{newTime}</span>
+					</p>
+					<h4 className="card-title grey-text text-darken-4"><a href="#" className="grey-text text-darken-4">{title}</a>
+					</h4>
+					<div className="blog-post-content truncate">{ReactHtmlParser(content)}</div>
+					<div className="divider"></div>
+					<p></p>
+					<div className="row">
+						<div className="col s3">
+							<img src="http://demo.geekslabs.com/materialize-v1.0/images/avatar.jpg" className="img-blog" />
+						</div>
+						<div className="col s9"> By <a href="#">{username}</a></div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 	);
 };
 

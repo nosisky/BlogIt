@@ -19,6 +19,6 @@ articleRouter
 	.get(getAllArticles)
 	.put(isLoggedIn, checkArticleId, editArticle);
 
-articleRouter.route('/:id').get(getOneArticle);
+articleRouter.route('/:slug').get(getOneArticle);
 
 export default articleRouter;

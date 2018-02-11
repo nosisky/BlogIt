@@ -28,7 +28,7 @@ const Validation = {
 			username: {
 				notEmpty: true,
 				isLength: {
-					options: [ { min: 4 } ],
+					options: [{ min: 4 }],
 					errorMessage: userNameError
 				},
 				errorMessage: 'Your Username is required'
@@ -43,7 +43,7 @@ const Validation = {
 			password: {
 				notEmpty: true,
 				isLength: {
-					options: [ { min: 4 } ],
+					options: [{ min: 4 }],
 					errorMessage: 'Provide a valid password with minimum of 4 characters'
 				},
 				errorMessage: 'Your Password is required'
@@ -77,7 +77,7 @@ const Validation = {
 		const username = req.body.username.toLowerCase();
 
 		return User.findOne({
-			$or: [ { username }, { email: req.body.email } ]
+			$or: [{ username }, { email: req.body.email }]
 		}).then((user) => {
 			if (user) {
 				if (user.email === req.body.email) {
@@ -141,7 +141,7 @@ const Validation = {
 			title: {
 				notEmpty: true,
 				isLength: {
-					options: [ { min: 5 } ],
+					options: [{ min: 5 }],
 					errorMessage: articleError
 				},
 				errorMessage: 'Article title is required'
@@ -183,7 +183,7 @@ const Validation = {
 			_id,
 			title,
 			content,
-			authorId: req.decoded.currentUser._id
+			author: req.decoded.currentUser.username
 		};
 		next();
 	}
