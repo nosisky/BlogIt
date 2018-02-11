@@ -3,10 +3,6 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-	fullName: {
-		type: String,
-		required: 'Kindly enter you full name'
-	},
 	username: {
 		type: String,
 		required: 'Please enter your username'

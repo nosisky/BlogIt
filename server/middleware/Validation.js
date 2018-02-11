@@ -4,11 +4,12 @@ import omit from 'lodash/omit';
 import mongoose from 'mongoose';
 
 import User from '../models/User';
+import Article from '../models/Article';
 
 const Validation = {
 	/**
    *
-   * @description - Validates User Input
+   * @description - Validates Article Input
    *
    * @param {Object} req - request
    *
@@ -21,7 +22,6 @@ const Validation = {
 	checkUserInput(req, res, next) {
 		let userNameError = '';
 		userNameError = 'Please provide a username with atleast 4 characters.';
-		req.assert('passwordConfirm', 'Confirm password').notEmpty().len(5, 20);
 		req.assert('passwordConfirm', 'Passwords must match').equals(req.body.password);
 
 		req.checkBody({
@@ -40,15 +40,11 @@ const Validation = {
 				},
 				errorMessage: 'Your Email Address is required'
 			},
-			fullName: {
-				notEmpty: true,
-				errorMessage: 'Your Fullname is required'
-			},
 			password: {
 				notEmpty: true,
 				isLength: {
-					options: [ { min: 5 } ],
-					errorMessage: 'Provide a valid password with minimum of 8 characters'
+					options: [ { min: 4 } ],
+					errorMessage: 'Provide a valid password with minimum of 4 characters'
 				},
 				errorMessage: 'Your Password is required'
 			}
@@ -107,7 +103,7 @@ const Validation = {
 	},
 
 	/**
- * Checks if artic,e id is a number
+ * Checks if article id is a number
  *
  * @param {Object} req - request
  *
@@ -119,9 +115,9 @@ const Validation = {
  */
 	checkArticleId(req, res, next) {
 		const querier = req.body.articleId;
-		if (!querier || /[\D]/.test(querier)) {
+		if (!querier) {
 			return res.status(400).send({
-				message: 'Invalid book id supplied!!!'
+				message: 'Article ID is required'
 			});
 		}
 		next();
@@ -140,13 +136,13 @@ const Validation = {
    * @returns {Object} - Object containing error message
    */
 	checkArticleInput(req, res, next) {
-		const bookError = 'Please provide an article title with 5 characters and above';
+		const articleError = 'Please provide an article title with 5 characters and above';
 		req.checkBody({
 			title: {
 				notEmpty: true,
 				isLength: {
 					options: [ { min: 5 } ],
-					errorMessage: bookError
+					errorMessage: articleError
 				},
 				errorMessage: 'Article title is required'
 			},
@@ -181,12 +177,13 @@ const Validation = {
    * @returns {Object} - Object containing article inout
    */
 	sendArticleInput(req, res, next) {
-		const { title, content } = req.body;
+		const { title, content, _id } = req.body;
 
 		req.article = {
+			_id,
 			title,
 			content,
-			authorId: req.decoded._id
+			authorId: req.decoded.currentUser._id
 		};
 		next();
 	}

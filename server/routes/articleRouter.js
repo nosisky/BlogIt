@@ -8,17 +8,17 @@ import Authorization from '../middleware/Authorization';
 const { checkArticleId, checkArticleInput, sendArticleInput } = Validation;
 const { isLoggedIn } = Authorization;
 
-const { createArticle } = ArticleController;
+const { createArticle, getOneArticle, deleteArticle, getAllArticles, editArticle } = ArticleController;
 
 const articleRouter = express.Router();
 
-//Create a new article
-articleRouter.route('/').post(isLoggedIn, checkArticleInput, createArticle, sendArticleInput);
+articleRouter
+	.route('/')
+	.post(isLoggedIn, checkArticleInput, sendArticleInput, createArticle)
+	.delete(checkArticleId, deleteArticle)
+	.get(getAllArticles)
+	.put(isLoggedIn, checkArticleId, editArticle);
 
-// //Modify article
-// articleRouter.route('/').put(checkArticleId);
-
-// //Delete article
-// articleRouter.route('/').delete(checkArticleId);
+articleRouter.route('/:id').get(getOneArticle);
 
 export default articleRouter;

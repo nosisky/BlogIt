@@ -8,11 +8,11 @@ const CommentSchema = new Schema({
 	},
 	comment: {
 		type: String,
-		required: 'Please enter your username'
+		required: 'Please enter your comment'
 	},
 	articleId: {
 		type: String,
-		required: 'Please enter your password'
+		required: 'Please enter article ID'
 	},
 	createdDate: {
 		type: Date,
