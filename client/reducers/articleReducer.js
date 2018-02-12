@@ -32,7 +32,6 @@ function articleReducer(state = initialState, action) {
 		case EDIT_ARTICLE: {
 			const editedArticle = [];
 			state.articles.map((article) => {
-				console.log(article, action.article, 'reducer')
 				if (article._id === action.article._id) {
 					editedArticle.push(action.article);
 				} else {
@@ -43,7 +42,7 @@ function articleReducer(state = initialState, action) {
 		}
 		case DELETE_ARTICLE: {
 			const newState = state.articles
-				.filter((article) => article._id !== action.article._id);
+				.filter((article) => article._id !== action.articleId);
 			return { ...state, articles: newState };
 		}
 		default: {

@@ -54,10 +54,7 @@ class ArticlePage extends Component {
       if (willDelete) {
         this.props.deleteArticle({ articleId: this.props.article._id })
           .then((response) => {
-            swal(response, { icon: 'success' })
-              .then(() => {
-                this.props.history.push('/')
-              })
+            this.props.history.push('/')
           });
       } else {
         swal('Article was not deleted');
