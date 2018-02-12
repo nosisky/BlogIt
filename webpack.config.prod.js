@@ -4,7 +4,7 @@ const cleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 	cache: true,
-	entry: [ './client/index.jsx' ],
+	entry: ['./client/index.jsx'],
 	output: {
 		path: path.join(__dirname, './client/dist/'),
 		publicPath: './client',
@@ -14,8 +14,8 @@ module.exports = {
 		Materialize: 'Materialize'
 	},
 	plugins: [
-		new cleanWebpackPlugin([ 'client/dist' ]),
-		new webpack.EnvironmentPlugin([ 'secretKey' ]),
+		new cleanWebpackPlugin(['client/dist']),
+		new webpack.EnvironmentPlugin(['secretKey']),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.optimize.OccurrenceOrderPlugin(),
@@ -53,7 +53,7 @@ module.exports = {
 						loader: 'babel-loader',
 						query: {
 							cacheDirectory: true,
-							presets: [ 'es2015', 'react' ]
+							presets: ['es2015', 'react', 'stage-1']
 						}
 					}
 				],
@@ -62,7 +62,7 @@ module.exports = {
 			},
 			{
 				test: /(\.s?css)$/,
-				loader: [ 'style-loader', 'css-loader', 'sass-loader' ]
+				loader: ['style-loader', 'css-loader', 'sass-loader']
 			},
 			{
 				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
@@ -118,7 +118,7 @@ module.exports = {
 			}
 		]
 	},
-	resolve: { extensions: [ '.js', '.jsx', '.css' ] },
+	resolve: { extensions: ['.js', '.jsx', '.css'] },
 	node: {
 		dns: 'empty',
 		net: 'empty',
