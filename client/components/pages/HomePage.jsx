@@ -5,6 +5,7 @@ import NavBar from '../includes/NavBar';
 import ArticleLists from '../includes/ArticleLists';
 import { logoutAction } from '../../actions/UserActions';
 import { getAllArticles } from '../../actions/ArticleActions';
+import Footer from '../includes/Footer';
 
 class HomePage extends Component {
 
@@ -62,6 +63,7 @@ class HomePage extends Component {
 				<div className="row">
 					{this.renderArticles()}
 				</div>
+				<Footer />
 			</div>
 		);
 	}

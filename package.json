@@ -27,9 +27,7 @@
 		"node": "6.11.2"
 	},
 	"dependencies": {
-		"webpack-dev-middleware": "^2.0.5",
 		"ajv": "^6.1.1",
-		"winston": "^2.4.0",
 		"axios": "^0.17.1",
 		"babel-cli": "^6.26.0",
 		"babel-core": "^6.26.0",
@@ -61,6 +59,7 @@
 		"react-html-parser": "^2.0.2",
 		"react-redux": "^5.0.6",
 		"react-router-dom": "^4.2.2",
+		"react-text-truncate": "^0.12.1",
 		"react-tinymce": "^0.7.0",
 		"redux": "^3.7.2",
 		"redux-thunk": "^2.2.0",
@@ -68,6 +67,8 @@
 		"style-loader": "^0.20.1",
 		"sweetalert": "^2.1.0",
 		"url-loader": "^0.6.2",
-		"webpack": "^3.11.0"
+		"webpack": "^3.11.0",
+		"webpack-dev-middleware": "^2.0.5",
+		"winston": "^2.4.0"
 	}
 }

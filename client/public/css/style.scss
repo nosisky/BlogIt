@@ -1,5 +1,10 @@
 $mainColor: #ed3a3a;
 
+body {
+	min-height: 900px;
+	margin: 0 0 100px;
+}
+
 nav {
   background-color: $mainColor !important;
 }
@@ -62,6 +67,14 @@ a {
 	margin-top: 2em;
 	text-align: center;
 }
+
+.page-footer {
+	right: 0;
+	bottom: 0;
+	background-color: $mainColor;
+	left: 0;
+}
+
 
 .time {
 	font-size: 10px;

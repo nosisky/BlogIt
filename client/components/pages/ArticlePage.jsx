@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement, htmlparser2
+} from 'react-html-parser';
 
 import NavBar from '../includes/NavBar';
 import { logoutAction } from '../../actions/UserActions';
@@ -59,7 +63,7 @@ class ArticlePage extends Component {
         </div>
         <div className="article-section text-center">
           <h1> {title}</h1>
-          {content}
+          {ReactHtmlParser(content)}
           <div className="divider"></div>
           {!this.state.comment &&
             <button

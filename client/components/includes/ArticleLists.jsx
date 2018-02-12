@@ -5,6 +5,7 @@ import ReactHtmlParser, {
 } from 'react-html-parser';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import TextTruncate from 'react-text-truncate';
 
 
 const ArticleLists = ({ title, content, slug, username, time }) => {
@@ -27,7 +28,15 @@ const ArticleLists = ({ title, content, slug, username, time }) => {
 					</p>
 					<h4 className="card-title grey-text text-darken-4"><a href="#" className="grey-text text-darken-4">{title}</a>
 					</h4>
-					<div className="blog-post-content truncate">{ReactHtmlParser(content)}</div>
+					<div className="blog-post-content">
+						<TextTruncate
+							line={1}
+							truncateText="…"
+							text={(content.replace(/<(?:.|\n)*?>/gm, ''))}
+							textTruncateChild={<Link to={`/post/${slug}`}>
+								Read more
+					</Link>}
+						/>	</div>
 					<div className="divider"></div>
 					<p></p>
 					<div className="row">
