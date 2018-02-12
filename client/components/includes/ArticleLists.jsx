@@ -17,7 +17,7 @@ const ArticleLists = ({ title, content, slug, username, time }) => {
 
 				<div className="card-image waves-effect waves-block waves-light">
 					<Link to={`/post/${slug}`}><img
-						src="http://demo.geekslabs.com/materialize-v1.0/images/img2.jpg" alt="blog-img" />
+						src="/img/blogit.png" alt="blog-img" />
 					</Link>
 				</div>
 				<div className="card-content">

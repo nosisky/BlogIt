@@ -1,16 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import LoginForm from '../auth/LoginForm';
 import RegisterationForm from '../auth/RegisterationForm';
 import NewArticle from '../includes/NewArticle';
-const NavBar = ({ user, authenticated, logout }) => {
+const NavBar = ({ user, authenticated, editor, logout }) => {
 
 	return (
 		<div>
 			<nav>
 				<div className="nav-wrapper">
-					<a href="#" className="brand-logo">
-						BlogIt
-					</a>
+					<Link to="/" className="brand-logo">
+						Blog It
+					</Link>
 					<ul id="nav-mobile" className="right hide-on-med-and-down">
 						{!authenticated && (
 							<li>
@@ -28,7 +30,7 @@ const NavBar = ({ user, authenticated, logout }) => {
 							</li>
 						)}
 
-						{authenticated && (
+						{authenticated && !editor && (
 							<li>
 								<a className="modal-trigger" href="#add_article">
 									Add Article

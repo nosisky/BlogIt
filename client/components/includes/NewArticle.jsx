@@ -8,13 +8,14 @@ class NewArticle extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			content: '',
-			title: ''
+			content: this.props.content,
+			title: this.props.title
 		};
 		this.onChange = this.onChange.bind(this);
 		this.editorOnChange = this.editorOnChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 	}
+
 
 	onChange(event) {
 		this.setState({
@@ -36,6 +37,8 @@ class NewArticle extends Component {
 	};
 
 	render() {
+		const editorContent = this.state.content || '';
+
 		return (
 			<div>
 				<div id="add_article" className="modal">
@@ -50,6 +53,7 @@ class NewArticle extends Component {
 										<input name="title" id="title" type="text"
 											onChange={this.onChange}
 											className="validate"
+											defaultValue={this.state.title}
 											required
 										/>
 										<label htmlFor="icon_prefix">Title</label>
@@ -58,6 +62,7 @@ class NewArticle extends Component {
 								<div className="row">
 									<div className="col s12" />
 									<TinyMCE
+										content={editorContent}
 										config={{
 											plugins: 'autolink link image lists print preview',
 											toolbar:
