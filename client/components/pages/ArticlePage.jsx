@@ -10,6 +10,8 @@ import NavBar from '../includes/NavBar';
 import { logoutAction } from '../../actions/UserActions';
 import { getArticle } from '../../actions/ArticleActions';
 import NewArticle from '../includes/NewArticle';
+import Footer from '../includes/Footer';
+
 
 
 class ArticlePage extends Component {
@@ -62,7 +64,7 @@ class ArticlePage extends Component {
           <div className="time">{newTime}</div>
         </div>
         <div className="article-section text-center">
-          <h1> {title}</h1>
+          <h3> {title}</h3>
           {ReactHtmlParser(content)}
           <div className="divider"></div>
           {!this.state.comment &&
@@ -90,6 +92,7 @@ class ArticlePage extends Component {
             </ul>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
