@@ -22,7 +22,7 @@
 	"devDependencies": {
 		"babel-preset-stage-1": "^6.24.1",
 		"nodemon": "^1.14.12",
-		"webpack-dev-middleware": "^2.0.5",
+		"webpack-dev-middleware": "^2.0.5"
 	},
 	"engines": {
 		"node": "6.11.2"
