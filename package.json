@@ -21,13 +21,13 @@
 	"license": "MIT",
 	"devDependencies": {
 		"babel-preset-stage-1": "^6.24.1",
-		"nodemon": "^1.14.12",
-		"webpack-dev-middleware": "^2.0.5"
+		"nodemon": "^1.14.12"
 	},
 	"engines": {
 		"node": "6.11.2"
 	},
 	"dependencies": {
+		"webpack-dev-middleware": "^2.0.5",
 		"ajv": "^6.1.1",
 		"winston": "^2.4.0",
 		"axios": "^0.17.1",
