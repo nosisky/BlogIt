@@ -14,7 +14,7 @@ import commentRouter from './routes/commentRouter';
 
 dotenv.load();
 
-mongoose.connect(process.env.DATABASE_URL);
+mongoose.connect(process.env.MONGODB_URI);
 
 let db = mongoose.connection;
 
