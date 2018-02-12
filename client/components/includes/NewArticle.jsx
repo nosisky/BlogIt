@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import TinyMCE from 'react-tinymce';
 import { connect } from 'react-redux';
 
-import { addArticle } from '../../actions/ArticleActions';
+import { addArticle, getArticle } from '../../actions/ArticleActions';
 
 class NewArticle extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			content: this.props.content,
-			title: this.props.title
+			content: '',
+			title: ''
 		};
 		this.onChange = this.onChange.bind(this);
 		this.editorOnChange = this.editorOnChange.bind(this);
@@ -37,13 +37,13 @@ class NewArticle extends Component {
 	};
 
 	render() {
-		const editorContent = this.state.content || '';
-
 		return (
 			<div>
 				<div id="add_article" className="modal">
 					<div className="modal-content">
-						<h5 className="center-align">Add Article</h5>
+						<h5 className="center-align">
+							Add Article
+						</h5>
 						<div className="row">
 							<form className="col s12"
 								onSubmit={this.onSubmit}
@@ -53,7 +53,6 @@ class NewArticle extends Component {
 										<input name="title" id="title" type="text"
 											onChange={this.onChange}
 											className="validate"
-											defaultValue={this.state.title}
 											required
 										/>
 										<label htmlFor="icon_prefix">Title</label>
@@ -62,7 +61,6 @@ class NewArticle extends Component {
 								<div className="row">
 									<div className="col s12" />
 									<TinyMCE
-										content={editorContent}
 										config={{
 											plugins: 'autolink link image lists print preview',
 											toolbar:
@@ -88,4 +86,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, { addArticle })(NewArticle);
+export default connect(mapStateToProps, { addArticle, getArticle })(NewArticle);

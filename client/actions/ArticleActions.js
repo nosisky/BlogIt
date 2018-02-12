@@ -1,25 +1,29 @@
 import axios from 'axios';
 import { setApiCallProgress } from './UserActions';
-import { GET_ALL_ARTICLES, ADD_ARTICLES, GET_ONE_ARTICLE } from './ActionTypes';
+import {
+	GET_ALL_ARTICLES, ADD_ARTICLES,
+	GET_ONE_ARTICLE, EDIT_ARTICLE, DELETE_ARTICLE
+} from './ActionTypes';
 
 const apiUrl = '/api/v1/articles';
 
 export function getAllArticles() {
-	setApiCallProgress(true);
-	return (dispatch) =>
+	return (dispatch) => {
+		dispatch(setApiCallProgress(true))
 		axios
 			.get(apiUrl)
 			.then((response) => {
-				setApiCallProgress(false);
+				dispatch(setApiCallProgress(false));
 				dispatch({
 					type: GET_ALL_ARTICLES,
 					allArticles: response.data
 				});
 			})
 			.catch((error) => {
-				setApiCallProgress(false);
+				dispatch(setApiCallProgress(false))
 				Materialize.toast(error.response.data.message, '2000', 'red');
 			});
+	}
 }
 
 export function addArticle(articleData) {
@@ -37,15 +41,49 @@ export function addArticle(articleData) {
 		})
 }
 
-export function getArticle(slug) {
-	return dispatch => axios.get(`${apiUrl}/${slug}`)
+export function editArticle(articleData) {
+	return dispatch => axios.put(apiUrl, articleData)
 		.then((response) => {
 			dispatch({
-				type: GET_ONE_ARTICLE,
-				article: response.data
+				type: EDIT_ARTICLE,
+				article: response.data.updatedArticle
 			})
+			Materialize.toast(response.data.message, '2000');
 		})
 		.catch((error) => {
 			Materialize.toast(error.response.data.message, '2000', 'red')
 		})
+}
+
+export function deleteArticle(articleData) {
+	console.log(articleData)
+	return dispatch => axios.delete(apiUrl, articleData)
+		.then((response) => {
+			dispatch({
+				type: DELETE_ARTICLE,
+				articleId: response.data._id
+			})
+			Materialize.toast(response.data.message, '2000');
+		})
+		.catch((error) => {
+			Materialize.toast(error.response.data.message, '2000', 'red')
+		})
+}
+
+export function getArticle(slug) {
+	return dispatch => {
+		dispatch(setApiCallProgress(true))
+		axios.get(`${apiUrl}/${slug}`)
+			.then((response) => {
+				dispatch(setApiCallProgress(false))
+				dispatch({
+					type: GET_ONE_ARTICLE,
+					article: response.data
+				})
+			})
+			.catch((error) => {
+				dispatch(setApiCallProgress(false))
+				Materialize.toast(error.response.data.message, '2000', 'red')
+			})
+	}
 }

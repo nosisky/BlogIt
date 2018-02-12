@@ -1,4 +1,8 @@
-import { GET_ALL_ARTICLES, ADD_ARTICLES, GET_ONE_ARTICLE } from '../actions/ActionTypes';
+import {
+	GET_ALL_ARTICLES, ADD_ARTICLES,
+	GET_ONE_ARTICLE, EDIT_ARTICLE, DELETE_ARTICLE
+} from '../actions/ActionTypes';
+import { editArticle } from '../actions/ArticleActions';
 
 const initialState = {
 	articles: [],
@@ -24,6 +28,23 @@ function articleReducer(state = initialState, action) {
 				...state,
 				article: action.article
 			}
+		}
+		case EDIT_ARTICLE: {
+			const editedArticle = [];
+			state.articles.map((article) => {
+				console.log(article, action.article, 'reducer')
+				if (article._id === action.article._id) {
+					editedArticle.push(action.article);
+				} else {
+					editedArticle.push(article);
+				}
+			});
+			return { ...state, allArticles: editedArticle };
+		}
+		case DELETE_ARTICLE: {
+			const newState = state.articles
+				.filter((article) => article._id !== action.article._id);
+			return { ...state, articles: newState };
 		}
 		default: {
 			return state;

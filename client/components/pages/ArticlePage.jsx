@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import ReactHtmlParser, {
   processNodes,
   convertNodeToElement, htmlparser2
 } from 'react-html-parser';
+import swal from 'sweetalert';
 
 import NavBar from '../includes/NavBar';
 import { logoutAction } from '../../actions/UserActions';
-import { getArticle } from '../../actions/ArticleActions';
-import NewArticle from '../includes/NewArticle';
+import { getArticle, deleteArticle } from '../../actions/ArticleActions';
 import Footer from '../includes/Footer';
-
-
 
 class ArticlePage extends Component {
   constructor(props) {
@@ -20,9 +19,11 @@ class ArticlePage extends Component {
     this.state = {
       title: '',
       content: '',
-      comment: false
+      comment: false,
+      renderEditor: false
     }
     this.activateComment = this.activateComment.bind(this);
+    this.deleteHandler = this.deleteHandler.bind(this);
   }
 
   componentDidMount() {
@@ -41,58 +42,83 @@ class ArticlePage extends Component {
       comment: !this.state.comment
     })
   }
+
+  deleteHandler() {
+    swal({
+      title: 'Are you sure?',
+      text: 'Once deleted, you will not be able to recover it back!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    }).then((willDelete) => {
+      if (willDelete) {
+        this.props.deleteArticle({ articleId: this.props.article._id })
+          .then((response) => {
+            swal(response, { icon: 'success' })
+              .then(() => {
+                this.props.history.push('/')
+              })
+          });
+      } else {
+        swal('Article was not deleted');
+      }
+    });
+  }
+
+
   render() {
     const { title, author, time, content } = this.props.article;
     const newTime = moment(time).format('Do MMMM YYYY');
-
     return (
       <div>
-        {typeof title !== 'undefined' &&
-          <NewArticle
-            editor={true}
-            title={title}
-            content={content}
-          />}
         <NavBar
-          editor={true}
           logout={this.props.logoutAction}
           authenticated={this.props.isAuthenticated}
         />
-        <div className="row article-section-left">
-          <img src="http://demo.geekslabs.com/materialize-v1.0/images/avatar.jpg" className="img-blog" />
-          <a href="#">{author}</a>
-          <div className="time">{newTime}</div>
-        </div>
-        <div className="article-section text-center">
-          <h3> {title}</h3>
-          {ReactHtmlParser(content)}
-          <div className="divider"></div>
-          {!this.state.comment &&
-            <button
-              onClick={this.activateComment}
-              className="btn red">Add comment</button>
-          }
-          {
-            this.state.comment &&
-            <form>
-              <textarea id="comment" className="materialize-textarea"
-                placeholder="Add comment"></textarea>
-              <button className="btn red">Submit</button>
-            </form>
-          }
-          <div className="fixed-action-btn">
-            <a className="btn-floating btn-large red">
-              <i className="large material-icons">settings</i>
-            </a>
-            <ul>
-              <li><a className="btn-floating black modal-trigger"
-                href="#add_article"><i className="material-icons">mode_edit</i></a></li>
-              <li><a className="btn-floating red darken-1">
-                <i className="material-icons">delete</i></a></li>
-            </ul>
+
+        <div>
+
+          <div className="row article-section-left">
+            <img src="http://demo.geekslabs.com/materialize-v1.0/images/avatar.jpg" className="img-blog" />
+            <a href="#">{author}</a>
+            <div className="time">{newTime}</div>
           </div>
+          <div className="article-section text-center">
+            <h3> {title}</h3>
+            {ReactHtmlParser(content)}
+            <div className="divider"></div>
+            {!this.state.comment &&
+              <button
+                onClick={this.activateComment}
+                className="btn red">Add comment</button>
+            }
+            {
+              this.state.comment &&
+              <form>
+                <textarea id="comment" className="materialize-textarea"
+                  placeholder="Add comment"></textarea>
+                <button className="btn red">Submit</button>
+              </form>
+            }
+            {this.props.isAuthenticated && <div className="fixed-action-btn">
+              <a className="btn-floating btn-large red">
+                <i className="large material-icons">settings</i>
+              </a>
+              <ul>
+                <li><Link to={`/edit/${this.props.match.params.slug}`}
+                  className="btn-floating black"
+
+                ><i className="material-icons">mode_edit</i></Link></li>
+                <li><a onClick={this.deleteHandler}
+                  className="btn-floating red darken-1">
+                  <i className="material-icons">delete</i></a></li>
+              </ul>
+            </div>}
+
+          </div>
+          <Footer />
         </div>
-        <Footer />
+
       </div>
     );
   }
@@ -109,6 +135,7 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   logoutAction,
-  getArticle
+  getArticle,
+  deleteArticle
 })(ArticlePage);
 

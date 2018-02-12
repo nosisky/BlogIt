@@ -114,6 +114,7 @@ const Validation = {
  * @returns { Object } - containing error message
  */
 	checkArticleId(req, res, next) {
+		console.log(req.body, '--')
 		const querier = req.body.articleId;
 		if (!querier) {
 			return res.status(400).send({
