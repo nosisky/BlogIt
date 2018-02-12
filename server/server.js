@@ -21,7 +21,7 @@ let db = mongoose.connection;
 const server = express();
 const port = process.env.PORT || 3000;
 
-server.use(express.static('/client/')); // configure static files folder
+server.use(express.static(path.join(__dirname, '../client'))); // configure static files folder
 server.use(express.static(path.join(__dirname, '../client/public'))); // configure static files folder
 
 if (process.env.NODE_ENV === 'development') {
