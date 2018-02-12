@@ -6,11 +6,11 @@ import bodyParser from 'body-parser';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpack from 'webpack';
 import validator from 'express-validator';
-import webpackConfigDev from './webpack.config.dev';
+import webpackConfigDev from '../webpack.config.dev';
 import path from 'path';
-import userRouter from './server/routes/userRouter';
-import articleRouter from './server/routes/articleRouter';
-import commentRouter from './server/routes/commentRouter';
+import userRouter from './routes/userRouter';
+import articleRouter from './routes/articleRouter';
+import commentRouter from './routes/commentRouter';
 
 dotenv.load();
 
@@ -21,8 +21,8 @@ let db = mongoose.connection;
 const server = express();
 const port = process.env.PORT || 3000;
 
-server.use(express.static('./client/')); // configure static files folder
-server.use(express.static('./client/public/')); // configure static files folder
+server.use(express.static('/client/')); // configure static files folder
+server.use(express.static(path.join(__dirname, '../client/public'))); // configure static files folder
 
 if (process.env.NODE_ENV === 'development') {
 	server.use(webpackMiddleware(webpack(webpackConfigDev)));
@@ -37,7 +37,7 @@ server.use('/api/v1/articles', articleRouter);
 server.use('/api/v1/comments', commentRouter);
 
 server.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, './client/index.html'));
+	res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
 server.listen(port);

@@ -5,8 +5,11 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon --watch server --exec babel-node server.js",
-		"build-server": "babel -d ./build ./server -s"
+		"start": "nodemon --watch server --exec babel-node server/server.js",
+		"build-server": "babel -d ./build ./server -s",
+		"build-client": "webpack --progress --config ./webpack.config.prod.js",
+		"start-server": "node ./build/server.js",
+		"heroku-postbuild": "NODE_ENV=production &&npm run build-server && npm run build-client"
 	},
 	"keywords": [
 		"node",
