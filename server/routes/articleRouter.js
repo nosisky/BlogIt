@@ -6,7 +6,7 @@ import Validation from '../middleware/Validation';
 import Authorization from '../middleware/Authorization';
 
 const { checkArticleId, checkArticleInput, sendArticleInput } = Validation;
-const { isLoggedIn } = Authorization;
+const { isLoggedIn, isAdmin } = Authorization;
 
 const { createArticle, getOneArticle, deleteArticle, getAllArticles, editArticle } = ArticleController;
 
@@ -15,9 +15,9 @@ const articleRouter = express.Router();
 articleRouter
 	.route('/')
 	.post(isLoggedIn, checkArticleInput, sendArticleInput, createArticle)
-	.delete(checkArticleId, deleteArticle)
+	.delete(isLoggedIn, isAdmin, checkArticleId, deleteArticle)
 	.get(getAllArticles)
-	.put(isLoggedIn, checkArticleId, editArticle);
+	.put(isLoggedIn, isAdmin, checkArticleId, editArticle);
 
 articleRouter.route('/:slug').get(getOneArticle);
 
