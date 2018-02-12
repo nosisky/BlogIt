@@ -5,35 +5,35 @@ import { connect } from 'react-redux';
 import { addArticle, getArticle } from '../../actions/ArticleActions';
 
 class NewArticle extends Component {
-	constructor(props) {
-		super(props);
+	constructor( props ) {
+		super( props );
 		this.state = {
 			content: '',
 			title: ''
 		};
-		this.onChange = this.onChange.bind(this);
-		this.editorOnChange = this.editorOnChange.bind(this);
-		this.onSubmit = this.onSubmit.bind(this);
+		this.onChange = this.onChange.bind( this );
+		this.editorOnChange = this.editorOnChange.bind( this );
+		this.onSubmit = this.onSubmit.bind( this );
 	}
 
 
-	onChange(event) {
-		this.setState({
+	onChange( event ) {
+		this.setState( {
 			[event.target.name]: event.target.value
-		})
+		} )
 	};
 
-	editorOnChange(event) {
-		this.setState({
+	editorOnChange( event ) {
+		this.setState( {
 			content: event.target.getContent()
-		})
+		} )
 	};
 
-	onSubmit(event) {
+	onSubmit( event ) {
 		event.preventDefault();
 		this.editorOnChange;
 
-		this.props.addArticle(this.state)
+		this.props.addArticle( this.state )
 	};
 
 	render() {
@@ -46,12 +46,12 @@ class NewArticle extends Component {
 						</h5>
 						<div className="row">
 							<form className="col s12"
-								onSubmit={this.onSubmit}
+								onSubmit={ this.onSubmit }
 							>
 								<div className="row">
 									<div className="input-field col s12">
 										<input name="title" id="title" type="text"
-											onChange={this.onChange}
+											onChange={ this.onChange }
 											className="validate"
 											required
 										/>
@@ -61,12 +61,12 @@ class NewArticle extends Component {
 								<div className="row">
 									<div className="col s12" />
 									<TinyMCE
-										config={{
+										config={ {
 											plugins: 'autolink link image lists print preview',
 											toolbar:
 												'undo redo | bold italic | alignleft aligncenter alignright' | 'img'
-										}}
-										onChange={this.editorOnChange}
+										} }
+										onChange={ this.editorOnChange }
 									/>
 								</div>
 								<button className="btn right">Submit</button>
@@ -79,11 +79,12 @@ class NewArticle extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+function mapStateToProps( state ) {
 	return {
 		user: state.auth.user,
 		isAuthenticated: state.auth.authenticated,
 	};
 }
 
-export default connect(mapStateToProps, { addArticle, getArticle })(NewArticle);
+export default connect( mapStateToProps, 
+	{ addArticle, getArticle } )( NewArticle );

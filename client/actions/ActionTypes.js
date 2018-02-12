@@ -6,3 +6,7 @@ export const ADD_ARTICLES = 'add_article';
 export const GET_ONE_ARTICLE = 'get_one_article';
 export const EDIT_ARTICLE = 'edit_article';
 export const DELETE_ARTICLE = 'delete_article';
+export const ADD_COMMENT = 'edit_comment';
+export const DELETE_COMMENT = 'delete_comment';
+export const EDIT_COMMENT = 'edit_comment';
+export const GET_COMMENT = 'get_comment';

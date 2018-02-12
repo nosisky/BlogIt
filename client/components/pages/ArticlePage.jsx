@@ -11,6 +11,7 @@ import swal from 'sweetalert';
 import NavBar from '../includes/NavBar';
 import { logoutAction } from '../../actions/UserActions';
 import { getArticle, deleteArticle } from '../../actions/ArticleActions';
+import { addComment } from '../../actions/CommentActions';
 import Footer from '../includes/Footer';
 
 class ArticlePage extends Component {
@@ -20,10 +21,14 @@ class ArticlePage extends Component {
       title: '',
       content: '',
       comment: false,
-      renderEditor: false
+      renderEditor: false,
+      articleId: this.props.article._id,
+      comment: ''
     }
     this.activateComment = this.activateComment.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
+    this.submitComment = this.submitComment.bind(this);
+    this.commentOnChange = this.commentOnChange.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +45,20 @@ class ArticlePage extends Component {
   activateComment() {
     this.setState({
       comment: !this.state.comment
+    })
+  }
+
+  submitComment(event) {
+    event.preventDefault();
+    this.props.addComment(this.state)
+      .then(() => {
+        console.log('hello world!')
+      })
+  }
+
+  commentOnChange(event) {
+    this.setState({
+      comment: event.target.value
     })
   }
 
@@ -74,7 +93,6 @@ class ArticlePage extends Component {
         />
 
         <div>
-
           <div className="row article-section-left">
             <img src="http://demo.geekslabs.com/materialize-v1.0/images/avatar.jpg" className="img-blog" />
             <a href="#">{author}</a>
@@ -91,8 +109,10 @@ class ArticlePage extends Component {
             }
             {
               this.state.comment &&
-              <form>
-                <textarea id="comment" className="materialize-textarea"
+              <form name="comment" onSubmit={this.submitComment}>
+                <textarea onChange={this.commentOnChange}
+                  name="comment"
+                  id="comment" className="materialize-textarea"
                   placeholder="Add comment"></textarea>
                 <button className="btn red">Submit</button>
               </form>
@@ -133,6 +153,7 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   logoutAction,
   getArticle,
-  deleteArticle
+  deleteArticle,
+  addComment
 })(ArticlePage);
 
