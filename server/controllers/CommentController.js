@@ -1,5 +1,3 @@
-import omit from 'lodash/omit';
-
 import Comment from '../models/Comment';
 
 const CommentControlller = {

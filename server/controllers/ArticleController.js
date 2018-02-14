@@ -1,5 +1,3 @@
-import omit from 'lodash/omit';
-
 import Article from '../models/Article';
 import Comment from '../models/Comment';
 

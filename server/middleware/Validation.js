@@ -1,10 +1,7 @@
 import bcrypt from 'bcrypt';
-import omit from 'lodash/omit';
 
-import mongoose from 'mongoose';
 
 import User from '../models/User';
-import Article from '../models/Article';
 
 const Validation = {
   /**

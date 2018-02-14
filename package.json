@@ -20,6 +20,7 @@
 	"author": "Abdulrasaq Nasirudeen",
 	"license": "MIT",
 	"devDependencies": {
+		"babel-eslint": "^8.2.1",
 		"babel-preset-stage-1": "^6.24.1",
 		"eslint": "^4.17.0",
 		"eslint-config": "^0.3.0",

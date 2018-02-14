@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement, htmlparser2
-} from 'react-html-parser';
+import ReactHtmlParser from 'react-html-parser';
 import swal from 'sweetalert';
 
 import NavBar from '../includes/NavBar';
@@ -14,13 +11,14 @@ import { getArticle, deleteArticle } from '../../actions/ArticleActions';
 import { addComment } from '../../actions/CommentActions';
 import Footer from '../includes/Footer';
 
+
 class ArticlePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       title: '',
       content: '',
-      comment: false,
+      commentActivator: false,
       renderEditor: false,
       articleId: this.props.article._id,
       comment: ''
@@ -44,7 +42,7 @@ class ArticlePage extends Component {
   }
   activateComment() {
     this.setState({
-      comment: !this.state.comment
+      commentActivator: !this.state.comment
     })
   }
 
@@ -52,7 +50,6 @@ class ArticlePage extends Component {
     event.preventDefault();
     this.props.addComment(this.state)
       .then(() => {
-        console.log('hello world!')
       })
   }
 
@@ -72,7 +69,7 @@ class ArticlePage extends Component {
     }).then((willDelete) => {
       if (willDelete) {
         this.props.deleteArticle({ articleId: this.props.article._id })
-          .then((response) => {
+          .then(() => {
             this.props.history.push('/')
           });
       } else {
@@ -92,23 +89,25 @@ class ArticlePage extends Component {
           authenticated={this.props.isAuthenticated}
         />
 
-        <div>
+        <div className="post-view">
           <div className="row article-section-left">
-            <img src="http://demo.geekslabs.com/materialize-v1.0/images/avatar.jpg" className="img-blog" />
-            <a href="#">{author}</a>
+            <img src="/img/avatar.jpg" className="img-blog" />
+            <a style={{fontSize: 20}} href="#">{author}</a>
             <div className="time">{newTime}</div>
           </div>
-          <div className="article-section text-center">
-            <h3> {title}</h3>
-            {ReactHtmlParser(content)}
+          <div className="article-section">
+            <h3 className="center">{title}</h3>
             <div className="divider"></div>
-            {!this.state.comment &&
+            <div className="main-content"> {ReactHtmlParser(content)} 
+              <div className="divider"></div>
+              {!this.state.commentActivator &&
               <button
                 onClick={this.activateComment}
-                className="btn red">Add comment</button>
-            }
+                className="btn red center">Add comment</button>
+              }
+            </div> 
             {
-              this.state.comment &&
+              this.state.commentActivator &&
               <form name="comment" onSubmit={this.submitComment}>
                 <textarea onChange={this.commentOnChange}
                   name="comment"

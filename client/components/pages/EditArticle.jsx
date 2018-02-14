@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TinyMCE from 'react-tinymce';
 import { connect } from 'react-redux';
+
 import NavBar from '../includes/NavBar';
 import { getArticle, editArticle } from '../../actions/ArticleActions';
 
@@ -19,7 +20,7 @@ class EditArticle extends Component {
   }
 
   componentDidMount() {
-    this.props.getArticle(this.props.match.params.slug)
+    this.props.getArticle(this.props.match.params.slug);
 
     $('.button-collapse').sideNav({
       menuWidth: 300, // Default is 300
@@ -33,23 +34,23 @@ class EditArticle extends Component {
   onChange(event) {
     this.setState({
       [event.target.name]: event.target.value
-    })
-  };
+    });
+  }
 
   editorOnChange(event) {
     this.setState({
       content: event.target.getContent()
-    })
-  };
+    });
+  }
 
   onSubmit(event) {
     event.preventDefault();
     this.props.editArticle(this.state)
       .then(() => {
         this.props.history.push('/');
-      })
+      });
     this.editorOnChange;
-  };
+  }
 
   render() {
     const { title, content } = this.state;
@@ -59,10 +60,10 @@ class EditArticle extends Component {
           logout={this.props.logoutAction}
           authenticated={this.props.isAuthenticated}
         />
-        <div id="add_article">
+        <div className="post-view">
           <h5 className="center-align">
             Edit Article
-            </h5>
+          </h5>
           <div className="row">
             <form className="col s12"
               onSubmit={this.onSubmit}
@@ -90,7 +91,7 @@ class EditArticle extends Component {
                   onChange={this.editorOnChange}
                 />
               </div>
-              <button className="btn right">Submit</button>
+              <button className="btn right red">Submit</button>
             </form>
           </div>
         </div>
@@ -99,6 +100,13 @@ class EditArticle extends Component {
   }
 }
 
+/**
+ * @description Maps state to props
+ *
+ * @param {Object} state - Application state
+ *
+ * @returns {Object} - Application state
+ */
 function mapStateToProps(state) {
   return {
     user: state.auth.user,

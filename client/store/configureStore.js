@@ -12,9 +12,11 @@ import rootReducers from '../reducers/rootReducer';
  *
  * @returns {Object} - Object containing data in redux store
  */
-const configureStore = () => {
-  createStore(rootReducers, compose(applyMiddleware(thunk)));
-};
+const configureStore = (() => createStore(
+  rootReducers,
+  compose(applyMiddleware(thunk))
+)
+);
 
 export default configureStore;
 

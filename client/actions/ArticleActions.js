@@ -94,7 +94,10 @@ export function editArticle(articleData) {
  * @returns {Promise} - Promise
  */
 export function deleteArticle(articleData) {
-  return dispatch => axios.delete(apiUrl, { data: { articleId: articleData.articleId } })
+  return dispatch => axios.delete(
+    apiUrl,
+    { data: { articleId: articleData.articleId } }
+  )
     .then((response) => {
       dispatch({
         type: DELETE_ARTICLE,

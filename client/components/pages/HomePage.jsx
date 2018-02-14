@@ -9,76 +9,77 @@ import Footer from '../includes/Footer';
 
 class HomePage extends Component {
 
-	constructor(props) {
-		super(props);
-		this.renderArticles = this.renderArticles.bind(this);
-	}
-	componentDidMount() {
-		$('.button-collapse').sideNav({
-			menuWidth: 300, // Default is 300
-			edge: 'right', // Choose the horizontal origin
-			closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-			draggable: true // Choose whether you can drag to open on touch screens,
-		});
-		$('.modal').modal();
-		this.props.getAllArticles();
-	}
+  constructor(props) {
+    super(props);
+    this.renderArticles = this.renderArticles.bind(this);
+  }
+  componentDidMount() {
+    $('.button-collapse').sideNav({
+      menuWidth: 300, // Default is 300
+      edge: 'right', // Choose the horizontal origin
+      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      draggable: true // Choose whether you can drag to open on touch screens,
+    });
+    $('.modal').modal();
+    this.props.getAllArticles();
+  }
 
-	renderArticles() {
-		let allArticles = this.props.articles.articles;
+  renderArticles() {
+    let allArticles = this.props.articles.articles;
 
-		if (allArticles.length < 1) {
-			{
-				this.props.apiStatus ? (
-					<div className="preloader"></div>
-				) : (
-						<div className="empty-notifier">
+    if (allArticles.length < 1) {
+      {
+        this.props.apiStatus ? (
+          <div className="preloader"></div>
+        ) : (
+          <div className="empty-notifier">
 							There is no article in the database</div>
-					);
-			}
-		} else {
-			return allArticles.map((article) => {
-				return (
-					<ArticleLists
-						title={article.title}
-						key={article._id}
-						slug={article.slug}
-						content={article.content}
-						username={article.author}
-						time={article.createdDate}
-					/>
-				)
-			});
-		}
-	}
+        );
+      }
+    } else {
+      return allArticles.map((article) => {
+        return (
+          <ArticleLists
+            title={article.title}
+            key={article._id}
+            slug={article.slug}
+            content={article.content}
+            username={article.author}
+            time={article.createdDate}
+          />
+        )
+      });
+    }
+  }
 
-	render() {
-		return (
-			<div>
-				<NavBar
-					logout={this.props.logoutAction}
-					authenticated={this.props.isAuthenticated}
-					user={this.props.user}
-				/>
-				<div className="row">
-					{this.renderArticles()}
-				</div>
-				<Footer />
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        <NavBar
+          home={true}
+          logout={this.props.logoutAction}
+          authenticated={this.props.isAuthenticated}
+          user={this.props.user}
+        />
+        <div className="row">
+          {this.renderArticles()}
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-	return {
-		user: state.auth.user,
-		isAuthenticated: state.auth.authenticated,
-		articles: state.articles,
-		apiStatus: state.auth.apiStatus
-	};
+  return {
+    user: state.auth.user,
+    isAuthenticated: state.auth.authenticated,
+    articles: state.articles,
+    apiStatus: state.auth.apiStatus
+  };
 }
 
 export default connect(mapStateToProps, {
-	logoutAction,
-	getAllArticles
+  logoutAction,
+  getAllArticles
 })(HomePage);

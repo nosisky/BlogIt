@@ -1,5 +1,27 @@
 $mainColor: #ed3a3a;
 
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	background: linear-gradient(to bottom, rgba(109, 106, 106, 0.78), rgba(189, 168, 168, 0.88)), url(https://png.pngtree.com/thumb_back/fw800/back_pic/04/19/99/24582d49c2232f1.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 900px;
+	margin: 0 0 100px;
+}
+
+.page-footer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background-color: #1a5261;
+	left: 0;
+}
+
+
 nav {
   background-color: $mainColor !important;
 }
@@ -21,8 +43,18 @@ div.preloader {
 }
 
 .card {
-	height: 35em !important;
+	height: 520px !important;
 	margin: 10px;
+	box-shadow: 3px 5px 9px 6px;
+}
+
+.card .card-image .card-title {
+    background-color: rgba(28, 31, 30, 0.88) !important;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 17px;
+    min-height: 70px;
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
@@ -34,7 +66,7 @@ a {
 }
 
 .img-blog {
-	height: 30px;
+	height: 50px;
   border-radius: 50px;
 }
 
@@ -56,15 +88,22 @@ a {
 	font-weight: 400;
 }
 
+nav .brand-logo {
+    font-size: 30px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
 .article-section {
 	margin: 2em;
-	text-align: center;
+	padding-bottom: 20px;
 }
 
 .article-section-left {
-	margin-right: 40%;
+	margin-right: 10%;
 	margin-top: 2em;
-	text-align: center;
+	margin-left: 40%;
+	text-transform: capitalize;
 }
 
 .page-footer {
@@ -78,4 +117,24 @@ a {
 .time {
 	font-size: 10px;
 	color: #c1b4b4;
+}
+
+div.mce-edit-area {
+	min-height: 200px;
+}
+
+.post-view {
+	width: 95%;
+	background-color: #fff;
+	left: 0;
+	right: 0;
+	margin: auto;
+	padding: 10px;
+	margin-top: 15px;
+}
+
+.main-content {
+	margin-left: 20%;
+	margin-right: 20%;
+	font-size: 25px;
 }

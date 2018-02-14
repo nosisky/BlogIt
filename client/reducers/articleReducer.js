@@ -2,7 +2,6 @@ import {
   GET_ALL_ARTICLES, ADD_ARTICLES,
   GET_ONE_ARTICLE, EDIT_ARTICLE, DELETE_ARTICLE
 } from '../actions/ActionTypes';
-import { editArticle } from '../actions/ArticleActions';
 
 const initialState = {
   articles: [],
