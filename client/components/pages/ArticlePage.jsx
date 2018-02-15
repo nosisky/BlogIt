@@ -11,7 +11,7 @@ import { logoutAction } from '../../actions/UserActions';
 import { getArticle, deleteArticle } from '../../actions/ArticleActions';
 import { addComment } from '../../actions/CommentActions';
 import Footer from '../includes/Footer';
-import CommentList from '../includes/commentList';
+import CommentList from '../includes/CommentList';
 
 
 class ArticlePage extends Component {
@@ -157,20 +157,21 @@ class ArticlePage extends Component {
                   this.renderComments()
                 }
               </div>
-              {this.props.isAuthenticated && <div className="fixed-action-btn">
-                <a className="btn-floating btn-large red">
-                  <i className="large material-icons">settings</i>
-                </a>
-                <ul>
-                  <li><Link to={`/edit/${this.props.match.params.slug}`}
-                    className="btn-floating black"
+              {this.props.isAuthenticated && this.props.user.isAdmin 
+                && <div className="fixed-action-btn">
+                  <a className="btn-floating btn-large red">
+                    <i className="large material-icons">settings</i>
+                  </a>
+                  <ul>
+                    <li><Link to={`/edit/${this.props.match.params.slug}`}
+                      className="btn-floating black"
 
-                  ><i className="material-icons">mode_edit</i></Link></li>
-                  <li><a onClick={this.deleteHandler}
-                    className="btn-floating red darken-1">
-                    <i className="material-icons">delete</i></a></li>
-                </ul>
-              </div>}
+                    ><i className="material-icons">mode_edit</i></Link></li>
+                    <li><a onClick={this.deleteHandler}
+                      className="btn-floating red darken-1">
+                      <i className="material-icons">delete</i></a></li>
+                  </ul>
+                </div>}
 
             </div>
             <Footer />
