@@ -151,13 +151,15 @@ class ArticlePage extends Component {
               </form>
               }
               <div className="comment-stage">
+                {this.props.article.comments && 
+                this.props.article.comments.length > 0 && 
                 <h4 style={{paddingTop: '20px', textAlign: 'center' }}>
-                Comments</h4>
+                Comments</h4>}
                 {
                   this.renderComments()
                 }
               </div>
-              {this.props.isAuthenticated && this.props.user.isAdmin 
+              {this.props.isAuthenticated && this.props.user.isAdmin === 1 
                 && <div className="fixed-action-btn">
                   <a className="btn-floating btn-large red">
                     <i className="large material-icons">settings</i>
