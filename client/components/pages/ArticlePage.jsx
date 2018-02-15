@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import ReactHtmlParser from 'react-html-parser';
 import swal from 'sweetalert';
+import Loader from 'react-loader';
 
 import NavBar from '../includes/NavBar';
 import { logoutAction } from '../../actions/UserActions';
@@ -49,7 +50,8 @@ class ArticlePage extends Component {
   submitComment(event) {
     event.preventDefault();
     this.props.addComment(this.state)
-      .then(() => {
+      .then((response) => {
+        console.log(response)
       })
   }
 
@@ -84,30 +86,33 @@ class ArticlePage extends Component {
     const newTime = moment(time).format('Do MMMM YYYY');
     return (
       <div>
-        <NavBar
-          logout={this.props.logoutAction}
-          authenticated={this.props.isAuthenticated}
-        />
-
-        <div className="post-view">
-          <div className="row article-section-left">
-            <img src="/img/avatar.jpg" className="img-blog" />
-            <a style={{fontSize: 20}} href="#">{author}</a>
-            <div className="time">{newTime}</div>
-          </div>
-          <div className="article-section">
-            <h3 className="center">{title}</h3>
-            <div className="divider"></div>
-            <div className="main-content"> {ReactHtmlParser(content)} 
+        <Loader 
+          width={20} 
+          radius={50}
+          loaded={!this.props.apiStatus}>
+          <NavBar
+            logout={this.props.logoutAction}
+            authenticated={this.props.isAuthenticated}
+          />
+          <div className="post-view">
+            <div className="row article-section-left">
+              <img src="/img/avatar.jpg" className="img-blog" />
+              <a style={{fontSize: 20}} href="#">{author}</a>
+              <div className="time">{newTime}</div>
+            </div>
+            <div className="article-section">
+              <h3 className="center">{title}</h3>
               <div className="divider"></div>
-              {!this.state.commentActivator &&
+              <div className="main-content"> {ReactHtmlParser(content)} 
+                <div className="divider"></div>
+                {!this.state.commentActivator &&
               <button
                 onClick={this.activateComment}
                 className="btn red center">Add comment</button>
-              }
-            </div> 
-            {
-              this.state.commentActivator &&
+                }
+              </div> 
+              {
+                this.state.commentActivator &&
               <form name="comment" onSubmit={this.submitComment}>
                 <textarea onChange={this.commentOnChange}
                   name="comment"
@@ -115,26 +120,26 @@ class ArticlePage extends Component {
                   placeholder="Add comment"></textarea>
                 <button className="btn red">Submit</button>
               </form>
-            }
-            {this.props.isAuthenticated && <div className="fixed-action-btn">
-              <a className="btn-floating btn-large red">
-                <i className="large material-icons">settings</i>
-              </a>
-              <ul>
-                <li><Link to={`/edit/${this.props.match.params.slug}`}
-                  className="btn-floating black"
+              }
+              {this.props.isAuthenticated && <div className="fixed-action-btn">
+                <a className="btn-floating btn-large red">
+                  <i className="large material-icons">settings</i>
+                </a>
+                <ul>
+                  <li><Link to={`/edit/${this.props.match.params.slug}`}
+                    className="btn-floating black"
 
-                ><i className="material-icons">mode_edit</i></Link></li>
-                <li><a onClick={this.deleteHandler}
-                  className="btn-floating red darken-1">
-                  <i className="material-icons">delete</i></a></li>
-              </ul>
-            </div>}
+                  ><i className="material-icons">mode_edit</i></Link></li>
+                  <li><a onClick={this.deleteHandler}
+                    className="btn-floating red darken-1">
+                    <i className="material-icons">delete</i></a></li>
+                </ul>
+              </div>}
 
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-
+        </Loader>
       </div>
     );
   }

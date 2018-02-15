@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Loader from 'react-loader';
 
 import NavBar from '../includes/NavBar';
 import ArticleLists from '../includes/ArticleLists';
@@ -55,16 +56,21 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <NavBar
-          home={true}
-          logout={this.props.logoutAction}
-          authenticated={this.props.isAuthenticated}
-          user={this.props.user}
-        />
-        <div className="row">
-          {this.renderArticles()}
-        </div>
-        <Footer />
+        <Loader loaded={!this.props.apiStatus}
+          width={20} 
+          radius={50}
+        >
+          <NavBar
+            home={true}
+            logout={this.props.logoutAction}
+            authenticated={this.props.isAuthenticated}
+            user={this.props.user}
+          />
+          <div className="row">
+            {this.renderArticles()}
+          </div>
+          <Footer />
+        </Loader>
       </div>
     );
   }
