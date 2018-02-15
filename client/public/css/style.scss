@@ -149,7 +149,7 @@ div.mce-edit-area {
 }
 
 .comment-stage {
-	height: 1000px;
+	max-height: 1000px;
 	overflow-y: scroll;
 	width: 100%;
 }
