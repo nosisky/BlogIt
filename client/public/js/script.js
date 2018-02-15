@@ -8,4 +8,12 @@ $(document).ready(() => {
 
   $('.modal').modal();
 
+  $("#comment").emojioneArea({
+    pickerPosition: "top",
+    filtersPosition: "bottom",
+    tones: false,
+    autocomplete: false,
+    inline: true,
+    hidePickerOnBlur: false
+  });
 });

@@ -19,8 +19,9 @@ export function addComment(commentData) {
     .then((response) => {
       dispatch({
         type: ADD_COMMENT,
-        articleId: response.data.articleId
+        comment: response.data.comment
       });
+      document.getElementById('comment_form').reset();      
       Materialize.toast(response.data.message, '2000');
     })
     .catch((error) => {

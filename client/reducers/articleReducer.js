@@ -1,6 +1,6 @@
 import {
   GET_ALL_ARTICLES, ADD_ARTICLES,
-  GET_ONE_ARTICLE, EDIT_ARTICLE, DELETE_ARTICLE
+  GET_ONE_ARTICLE, EDIT_ARTICLE, DELETE_ARTICLE,
 } from '../actions/ActionTypes';
 
 const initialState = {
@@ -46,7 +46,7 @@ function articleReducer(state = initialState, action) {
         editedArticle.push(article);
       }
     });
-    return { ...state, allArticles: editedArticle };
+    return { ...state, articles: editedArticle };
   }
   case DELETE_ARTICLE: {
     const newState = state.articles

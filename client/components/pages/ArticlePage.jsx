@@ -11,6 +11,7 @@ import { logoutAction } from '../../actions/UserActions';
 import { getArticle, deleteArticle } from '../../actions/ArticleActions';
 import { addComment } from '../../actions/CommentActions';
 import Footer from '../includes/Footer';
+import CommentList from '../includes/commentList';
 
 
 class ArticlePage extends Component {
@@ -21,13 +22,14 @@ class ArticlePage extends Component {
       content: '',
       commentActivator: false,
       renderEditor: false,
-      articleId: this.props.article._id,
+      articleSlug: this.props.match.params.slug,
       comment: ''
     }
     this.activateComment = this.activateComment.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
     this.submitComment = this.submitComment.bind(this);
     this.commentOnChange = this.commentOnChange.bind(this);
+    this.renderComments = this.renderComments.bind(this);
   }
 
   componentDidMount() {
@@ -36,8 +38,8 @@ class ArticlePage extends Component {
     $('.button-collapse').sideNav({
       menuWidth: 300, // Default is 300
       edge: 'right', // Choose the horizontal origin
-      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-      draggable: true // Choose whether you can drag to open on touch screens,
+      closeOnClick: true, 
+      draggable: true 
     });
     $('.modal').modal();
   }
@@ -50,8 +52,13 @@ class ArticlePage extends Component {
   submitComment(event) {
     event.preventDefault();
     this.props.addComment(this.state)
-      .then((response) => {
-        console.log(response)
+      .then(() => {
+        this.props.getArticle(this.props.match.params.slug)   
+          .then(() => {
+            this.setState({
+              commentActivator: false
+            })
+          })   
       })
   }
 
@@ -80,6 +87,23 @@ class ArticlePage extends Component {
     });
   }
 
+  renderComments(){
+    const allComments = this.props.article.comments;
+    return (
+      allComments 
+      && allComments.map((comment) => {
+        return (
+          <div key={comment._id} className="comment">
+            <CommentList
+              comment={comment.comment}
+              author={comment.username}
+              time={moment(comment.createdDate).format('Do MMMM YYYY')}
+            />
+          </div>
+        )
+      })
+    )
+  }
 
   render() {
     const { title, author, time, content } = this.props.article;
@@ -103,24 +127,36 @@ class ArticlePage extends Component {
             <div className="article-section">
               <h3 className="center">{title}</h3>
               <div className="divider"></div>
-              <div className="main-content"> {ReactHtmlParser(content)} 
+              <div className="main-content"> 
+                {ReactHtmlParser(content)} 
                 <div className="divider"></div>
                 {!this.state.commentActivator &&
               <button
                 onClick={this.activateComment}
-                className="btn red center">Add comment</button>
+                className="btn red center">Comment</button>
                 }
-              </div> 
+              </div>
               {
                 this.state.commentActivator &&
-              <form name="comment" onSubmit={this.submitComment}>
+              <form name="comment" 
+                id="comment_form"
+                onSubmit={this.submitComment}>
                 <textarea onChange={this.commentOnChange}
                   name="comment"
-                  id="comment" className="materialize-textarea"
-                  placeholder="Add comment"></textarea>
-                <button className="btn red">Submit</button>
+                  id="comment" className="browser-default"
+                  placeholder="Add comment" required></textarea>
+                <button style={{
+                  margin: '10px 20% 10px 20%'
+                }} className="btn red right">Submit</button>
               </form>
               }
+              <div className="comment-stage">
+                <h4 style={{paddingTop: '20px', textAlign: 'center' }}>
+                Comments</h4>
+                {
+                  this.renderComments()
+                }
+              </div>
               {this.props.isAuthenticated && <div className="fixed-action-btn">
                 <a className="btn-floating btn-large red">
                   <i className="large material-icons">settings</i>

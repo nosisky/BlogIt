@@ -4,17 +4,17 @@ const { Schema } = mongoose;
 
 
 const CommentSchema = new Schema({
-  userId: {
+  username: {
     type: String,
-    required: 'User ID is required'
+    required: 'Username is required'
   },
   comment: {
     type: String,
     required: 'Please enter your comment'
   },
-  articleId: {
+  articleSlug: {
     type: String,
-    required: 'Please enter article ID'
+    required: 'Please enter article slug'
   },
   createdDate: {
     type: Date,

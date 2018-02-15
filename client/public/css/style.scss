@@ -141,3 +141,25 @@ div.mce-edit-area {
 	font-size: 25px;
 	word-wrap: break-word;
 }
+
+.post-view textarea {
+	width: 60% !important;
+	margin: 10px 20% 10px 20% !important;
+	height: 200px !important;
+}
+
+.comment-stage {
+	height: 1000px;
+	overflow-y: scroll;
+	width: 100%;
+}
+
+.comment {
+	background: #efeeee;
+	padding: 20px;
+	margin: 10px 20% 10px 20%;
+}
+
+div.comment-stage div.comment:nth-child(2n) {
+	background-color: #eae1e1;
+}

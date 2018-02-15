@@ -65,6 +65,7 @@
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-html-parser": "^2.0.2",
+		"react-limited-infinite-scroll": "^2.0.4",
 		"react-loader": "^2.4.2",
 		"react-preload": "^0.5.1",
 		"react-redux": "^5.0.6",

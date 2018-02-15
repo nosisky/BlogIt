@@ -44,12 +44,12 @@ const ArticleController = {
   /**
    * @description - Fetches all comments in the database
    *
-   * @param {Object} articleId - article ID
+   * @param {Object} articleSlug - article ID
    *
    * @returns {Array} - Array of all articles in the database
    */
-  getAllComments(articleId) {
-    return Comment.find({ articleId });
+  getAllComments(articleSlug) {
+    return Comment.find({ articleSlug });
   },
 
   /**
@@ -68,15 +68,16 @@ const ArticleController = {
       .then((article) => {
         if (article) {
           const newArticle = article.toObject();
-          ArticleController.getAllComments(req.params.id).then((comment) => {
-            if (comment) {
-              newArticle.comments = comment;
-              return res.status(200).send(newArticle);
-            }
-            return res.status(404).send({
-              message: 'Article not found'
+          ArticleController.getAllComments(req.params.slug)
+            .then((comment) => {
+              if (comment) {
+                newArticle.comments = comment;
+                return res.status(200).send(newArticle);
+              }
+              return res.status(404).send({
+                message: 'Article not found'
+              });
             });
-          });
         }
       })
       .catch(() => res.status(500)

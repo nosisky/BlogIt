@@ -12,7 +12,7 @@ const CommentControlller = {
    */
   addComment(req, res) {
     const newComment = new Comment(req.body);
-    newComment.userId = req.decoded.currentUser._id;
+    newComment.username = req.decoded.currentUser.username;
 
     newComment.save().then((comment) => {
       res.status(201).send({
@@ -32,7 +32,7 @@ const CommentControlller = {
 	 * @returns {Object}  - API response
    */
   editComment(req, res) {
-    Comment.findOneAndUpdate({ _id: req.body.commentId }, { $set: req.body })
+    Comment.findOneAndUpdate({ articleSlug: req.body.slug }, { $set: req.body })
       .then(updatedComment => res.status(200).send({
         updatedComment,
         message: 'Comment updated successfully'
@@ -52,7 +52,7 @@ const CommentControlller = {
 	 * @returns {Object} - API response
    */
   deleteComment(req, res) {
-    Comment.findOneAndRemove({ _id: req.body.commentId })
+    Comment.findOneAndRemove({ articleSlug: req.body.slug })
       .then(deletedComment => res.status(200).send({
         _id: deletedComment._id,
         message: 'Comment successfully deleted'

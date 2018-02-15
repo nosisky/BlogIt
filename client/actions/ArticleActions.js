@@ -52,6 +52,7 @@ export function addArticle(articleData) {
         type: ADD_ARTICLES,
         article: response.data.article
       });
+      document.getElementById('article_form').reset();
       $('.modal').modal('close');
       Materialize.toast(response.data.message, '2000');
     })

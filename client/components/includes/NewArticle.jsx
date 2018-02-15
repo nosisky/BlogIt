@@ -47,6 +47,7 @@ class NewArticle extends Component {
             <div className="row">
               <form className="col s12"
                 onSubmit={ this.onSubmit }
+                id="article_form"
               >
                 <div className="row">
                   <div className="input-field col s12">

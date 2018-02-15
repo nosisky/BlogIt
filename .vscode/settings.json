@@ -14,7 +14,7 @@
   "files.insertFinalNewline": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
   "files.associations": {
-    "*.jsx": "javascriptreact"
+    "*.jsx": "javascript"
   },
   "[javascriptreact]": {},
   "extensions.ignoreRecommendations": false
