@@ -39,7 +39,7 @@ export function addComment(commentData) {
  * @returns {Promise} - Promise
  */
 export function editComment(commentData) {
-  return dispatch => axios.put(apiUrl, commentData)
+  return dispatch => axios.put(apiUrl, {commentData})
     .then((response) => {
       dispatch({
         type: EDIT_COMMENT,
@@ -57,19 +57,19 @@ export function editComment(commentData) {
  *
  * @export {deleteComment}
  *
- * @param {Object} commentData - comment data
+ * @param {Object} commentId - comment data
  *
  * @returns {Promise} - Promise
  */
-export function deleteComment(commentData) {
+export function deleteComment(commentId) {
   return dispatch => axios
-    .delete(apiUrl, { data: { articleId: commentData.articleId } })
+    .delete(apiUrl, { data: { commentId } })
     .then((response) => {
       dispatch({
         type: DELETE_COMMENT,
         articleId: response.data._id
       });
-      Materialize.toast(response.data.message, '2000');
+      return Materialize.toast(response.data.message, '2000');
     })
     .catch((error) => {
       Materialize.toast(error.response.data.message, '2000', 'red');

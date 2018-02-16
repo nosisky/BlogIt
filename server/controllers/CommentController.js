@@ -32,7 +32,8 @@ const CommentControlller = {
 	 * @returns {Object}  - API response
    */
   editComment(req, res) {
-    Comment.findOneAndUpdate({ articleSlug: req.body.slug }, { $set: req.body })
+    Comment.findOneAndUpdate({ _id: req.body.commentData.commentId }, 
+      { $set: req.body.commentData })
       .then(updatedComment => res.status(200).send({
         updatedComment,
         message: 'Comment updated successfully'
@@ -52,9 +53,9 @@ const CommentControlller = {
 	 * @returns {Object} - API response
    */
   deleteComment(req, res) {
-    Comment.findOneAndRemove({ articleSlug: req.body.slug })
+    Comment.findOneAndRemove({ _id: req.body.commentId })
       .then(deletedComment => res.status(200).send({
-        _id: deletedComment._id,
+        slug: deletedComment.slug,
         message: 'Comment successfully deleted'
       }))
       .catch(() => res.status(500).send({

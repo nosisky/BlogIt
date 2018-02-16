@@ -78,9 +78,6 @@ class ArticlePage extends Component {
     }).then((willDelete) => {
       if (willDelete) {
         this.props.deleteArticle({ articleId: this.props.article._id })
-          .then(() => {
-            this.props.history.push('/')
-          });
       } else {
         swal('Article was not deleted');
       }
@@ -95,9 +92,12 @@ class ArticlePage extends Component {
         return (
           <div key={comment._id} className="comment">
             <CommentList
+              slug={this.props.match.params.slug}
               comment={comment.comment}
               author={comment.username}
               time={moment(comment.createdDate).format('Do MMMM YYYY')}
+              id={comment._id}
+              isAdmin={this.props.user.isAdmin}
             />
           </div>
         )
