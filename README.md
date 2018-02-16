@@ -2,6 +2,10 @@
 ### Blog-It is a simple blogging application, it contains features like, login, register, CRUD of blog posts and comments.
 
 
+For an online demo visit: [Demo](http://dealwap.herokuapp.com)
+
+
+
 ## Table of Contents
 
 * [Features](#features)
