@@ -11,7 +11,8 @@ const {
 
 const commentRouter = express.Router();
 
-commentRouter.route('/').post(isLoggedIn, addComment)
+commentRouter.route('/')
+  .post(isLoggedIn, addComment)
   .delete(isLoggedIn, deleteComment)
   .put(isLoggedIn, editComment);
 
