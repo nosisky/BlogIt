@@ -60,7 +60,7 @@ Blog It consists of the following features:
 > run ```npm start``` to start server
 
 
-```
+
 > Create a `.env` file in the root directory of the application. Use a different database for your testing and development. Example of the content of a .env file looks like this. Additionally, the contentof the .env.sample file should give you an overview of what the environment variables should look like. ```
 
 
